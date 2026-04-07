@@ -1,0 +1,28 @@
+name: reddit-phd
+region: nyc
+services:
+  - name: backend
+    source_dir: backend
+    github:
+      repo: bennyegeller-oss/REDDITPHDFINAL
+      branch: partner-synced-fullstack-v1-bg-work
+      deploy_on_push: true
+    run_command: npm start
+    environment_slug: node-js
+    envs:
+      - key: REDDIT_MODE
+        value: live
+      - key: NODE_ENV
+        value: production
+static_sites:
+  - name: frontend
+    source_dir: /
+    github:
+      repo: bennyegeller-oss/REDDITPHDFINAL
+      branch: partner-synced-fullstack-v1-bg-work
+      deploy_on_push: true
+    build_command: npm run build
+    output_dir: dist
+    envs:
+      - key: VITE_API_URL
+        value: ${backend.PUBLIC_URL}
