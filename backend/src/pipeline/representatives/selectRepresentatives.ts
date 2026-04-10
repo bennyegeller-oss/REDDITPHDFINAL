@@ -49,6 +49,8 @@ export function selectRepresentatives(units: ExperienceUnit[]): {
   const posPool = units.filter(
     (u) =>
       passesBodyQuality(u) &&
+      u.extraction.firstHand &&
+      !u.extraction.hearsay &&
       u.extraction.stance === 'positive' &&
       u.category === 'positive' &&
       u.experienceScore >= THRESHOLDS.repPositiveMinScore
@@ -57,6 +59,8 @@ export function selectRepresentatives(units: ExperienceUnit[]): {
   const negPool = units.filter(
     (u) =>
       passesBodyQuality(u) &&
+      u.extraction.firstHand &&
+      !u.extraction.hearsay &&
       u.extraction.stance === 'negative' &&
       u.category === 'negative' &&
       u.experienceScore <= THRESHOLDS.repNegativeMaxScore
